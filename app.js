@@ -2,6 +2,9 @@
 //  PawChef — App Logic
 // ===================================================
 
+// Guard: if GA is blocked by an ad blocker, make gtag a no-op so calls don't throw.
+if (typeof gtag !== "function") { window.gtag = () => {}; }
+
 // ---- State ----
 const state = {
   name: "",
@@ -49,6 +52,7 @@ function redeemLicenseKey() {
   // Right now any correctly-formatted key is accepted. Before going to
   // production you must validate the key against your issued-keys list on
   // a server you control so buyers can't share or forge keys.
+  gtag("event", "license_key_activated");
   localStorage.setItem("pawchef_pro", "true");
   localStorage.setItem("pawchef_license_key", key);
   input.value = "";
@@ -100,6 +104,7 @@ function goToStripe(plan) {
     showToast("🔗 Connect your Stripe account to enable payments!", "info");
     return;
   }
+  gtag("event", "pro_upgrade_clicked", { plan });
   window.open(link, "_blank");
 }
 
@@ -257,6 +262,7 @@ async function joinWaitlist(e) {
     $("waitlist-success-msg").textContent =
       `Thanks${name ? ", " + name : ""}! We'll send recipes, vet tips, and Pro early access to ${email}.`;
 
+    gtag("event", "email_signup_completed", { referral_source: referral });
     // Remember in localStorage so we don't ask again
     localStorage.setItem("pawchef_waitlist", email);
 
@@ -534,6 +540,7 @@ function renderAafcoResult(recipe, result) {
     renderCookPage(state.selectedRecipe, state.lastAafcoResult);
     show("section-cook");
     $("section-cook").scrollIntoView({ behavior: "smooth", block: "start" });
+    gtag("event", "recipe_generated", { recipe_name: state.selectedRecipe.name });
     // Reveal email capture after user has seen their first recipe
     show("section-waitlist");
   });
