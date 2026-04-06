@@ -29,12 +29,44 @@ function isPro() {
   return localStorage.getItem("pawchef_pro") === "true";
 }
 
-function activatePro() {
+// ---- License Key Redemption ----
+// REPLACE WITH SERVER-SIDE VERIFICATION BEFORE SCALING.
+// Currently validates key format client-side only. A real implementation must
+// POST the key to your backend, verify it against your database of issued keys
+// (e.g. from a Stripe webhook), mark it used, and return a signed token.
+const LICENSE_KEY_PATTERN = /^PAWCHEF-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
+
+function redeemLicenseKey() {
+  const input = $("license-key-input");
+  const key   = input.value.trim().toUpperCase();
+
+  if (!LICENSE_KEY_PATTERN.test(key)) {
+    showLicenseError("Invalid key format. Keys look like: PAWCHEF-XXXX-XXXX-XXXX");
+    return;
+  }
+
+  // REPLACE WITH SERVER-SIDE VERIFICATION BEFORE SCALING.
+  // Right now any correctly-formatted key is accepted. Before going to
+  // production you must validate the key against your issued-keys list on
+  // a server you control so buyers can't share or forge keys.
   localStorage.setItem("pawchef_pro", "true");
+  localStorage.setItem("pawchef_license_key", key);
+  input.value = "";
+  hideLicenseError();
   closeUpgradeModal();
   updateProBanner();
   renderRecipes(state.activeFilter);
   showToast("🎉 Pro activated! All recipes & features unlocked.", "success");
+}
+
+function showLicenseError(msg) {
+  const el = $("license-key-error");
+  el.textContent = msg;
+  el.classList.remove("hidden");
+}
+
+function hideLicenseError() {
+  $("license-key-error").classList.add("hidden");
 }
 
 function updateProBanner() {
@@ -502,6 +534,8 @@ function renderAafcoResult(recipe, result) {
     renderCookPage(state.selectedRecipe, state.lastAafcoResult);
     show("section-cook");
     $("section-cook").scrollIntoView({ behavior: "smooth", block: "start" });
+    // Reveal email capture after user has seen their first recipe
+    show("section-waitlist");
   });
 }
 
@@ -766,17 +800,6 @@ document.addEventListener("keydown", e => {
   if (e.key === "Escape") closeUpgradeModal();
 });
 
-// ---- Auto-activate Pro after Stripe redirect ----
-// Stripe sends users back to: https://bsalda.github.io/PawChef/?pro=1
-(function checkStripeReturn() {
-  const params = new URLSearchParams(window.location.search);
-  if (params.get("pro") === "1") {
-    localStorage.setItem("pawchef_pro", "true");
-    updateProBanner();
-    // Clean URL without reloading
-    window.history.replaceState({}, "", window.location.pathname);
-    setTimeout(() => {
-      showToast("🎉 Welcome to PawChef Pro! All recipes & features unlocked.", "success");
-    }, 500);
-  }
-})();
+// NOTE: The former ?pro=1 URL parameter bypass has been removed.
+// Pro is now activated only via a license key redeemed in the upgrade modal.
+// REPLACE WITH SERVER-SIDE VERIFICATION BEFORE SCALING.

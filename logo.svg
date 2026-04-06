@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 88" width="80" height="88">
+
+  <!-- ===== FORK (bottom-left → top-right diagonal) ===== -->
+  <!-- Handle -->
+  <line x1="16" y1="80" x2="50" y2="22"
+        stroke="#F2C4A0" stroke-width="3.8" stroke-linecap="round"/>
+  <!-- 3 tines -->
+  <line x1="44" y1="26" x2="40" y2="10"
+        stroke="#F2C4A0" stroke-width="2.6" stroke-linecap="round"/>
+  <line x1="50" y1="22" x2="48" y2="6"
+        stroke="#F2C4A0" stroke-width="2.6" stroke-linecap="round"/>
+  <line x1="56" y1="19" x2="56" y2="3"
+        stroke="#F2C4A0" stroke-width="2.6" stroke-linecap="round"/>
+
+  <!-- ===== SPOON (bottom-right → top-left diagonal) ===== -->
+  <!-- Handle -->
+  <line x1="64" y1="80" x2="30" y2="22"
+        stroke="#F2C4A0" stroke-width="3.8" stroke-linecap="round"/>
+  <!-- Bowl -->
+  <ellipse cx="26" cy="16" rx="10" ry="7" fill="#F2C4A0"/>
+
+  <!-- ===== PAW PRINT (centered, layered above fork/spoon) ===== -->
+  <!-- 4 toe pads -->
+  <ellipse cx="28" cy="42" rx="6"   ry="5"   fill="#F2C4A0"/>
+  <ellipse cx="37" cy="37" rx="6"   ry="5"   fill="#F2C4A0"/>
+  <ellipse cx="47" cy="37" rx="6"   ry="5"   fill="#F2C4A0"/>
+  <ellipse cx="56" cy="42" rx="6"   ry="5"   fill="#F2C4A0"/>
+
+  <!-- Main pad (large rounded bean) -->
+  <path d="M42 74
+           C29 74 23 64 23 57
+           C23 48 30 44 42 44
+           C54 44 61 48 61 57
+           C61 64 55 74 42 74 Z"
+        fill="#F2C4A0"/>
+
+  <!-- Heart inside main pad -->
+  <path d="M42 67
+           L37 61
+           C34.5 58 35.5 54.5 38.5 54.5
+           C40 54.5 42 56.5 42 56.5
+           C42 56.5 44 54.5 45.5 54.5
+           C48.5 54.5 49.5 58 47 61 Z"
+        fill="#BE5A38"/>
+
+</svg>

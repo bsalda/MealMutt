@@ -41,6 +41,24 @@
     </div>
   </header>
 
+  <!-- ===== CREDIBILITY STRIP ===== -->
+  <div class="credibility-strip">
+    <span class="cred-item">
+      <svg class="cred-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 2L12.4 7.2L18 8L14 11.8L15.2 17.4L10 14.6L4.8 17.4L6 11.8L2 8L7.6 7.2L10 2Z" fill="currentColor"/></svg>
+      Nutrition data from <strong>USDA FoodData Central</strong>
+    </span>
+    <span class="cred-divider" aria-hidden="true">·</span>
+    <span class="cred-item">
+      <svg class="cred-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 2a7 7 0 100 14A7 7 0 009 2zm0 1.5a5.5 5.5 0 110 11 5.5 5.5 0 010-11zM9 6a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 019 6zm0 6a.875.875 0 110 1.75A.875.875 0 019 12z" fill="currentColor"/></svg>
+      Checked against <strong>AAFCO Dog Food Nutrient Profiles</strong>
+    </span>
+    <span class="cred-divider" aria-hidden="true">·</span>
+    <span class="cred-item">
+      <svg class="cred-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1-5h2v2H9v-2zm0-8h2v6H9V5z" fill="currentColor"/></svg>
+      Always verify with your <strong>veterinarian</strong>
+    </span>
+  </div>
+
   <!-- ===== MAIN ===== -->
   <main class="container">
 
@@ -290,8 +308,8 @@
       </div>
     </section>
 
-    <!-- WAITLIST / EMAIL CAPTURE -->
-    <section class="card" id="section-waitlist">
+    <!-- WAITLIST / EMAIL CAPTURE (shown after first recipe is generated) -->
+    <section class="card hidden" id="section-waitlist">
       <div class="card-body waitlist-body">
 
         <!-- Default state -->
@@ -299,7 +317,7 @@
           <div class="waitlist-text">
             <div class="waitlist-icon">🐾</div>
             <h3>Get New Recipes &amp; Nutrition Tips Free</h3>
-            <p>Join 1,200+ dog owners getting weekly homemade meal ideas, vet tips, and PawChef Pro early access.</p>
+            <p>Be one of the first to get weekly homemade meal ideas, vet tips, and exclusive PawChef Pro founding member access.</p>
           </div>
           <form class="waitlist-form" id="waitlist-form" onsubmit="joinWaitlist(event)" novalidate>
             <div class="waitlist-fields">
@@ -347,7 +365,13 @@
 
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
-    <p>Always consult your vet before making major dietary changes for your dog.</p>
+    <p class="footer-disclaimer">
+      PawChef recipes are checked against <strong>AAFCO Dog Food Nutrient Profiles</strong> (2023 edition)
+      using live ingredient data from the <strong>USDA FoodData Central</strong> database.
+      These tools are for informational purposes only and are not a substitute for professional veterinary advice.
+      Always consult a licensed veterinarian before changing your dog's diet, especially for puppies,
+      seniors, or dogs with health conditions.
+    </p>
     <p class="footer-links">
       <a href="privacy.html">Privacy Policy</a> ·
       <a href="terms.html">Terms of Use</a> ·
@@ -389,7 +413,23 @@
       </div>
 
       <p class="upgrade-secure">🔒 Secure payment via Stripe · Cancel anytime</p>
-      <button class="upgrade-demo-btn" onclick="activatePro()">🧪 Try Pro Free (Demo Mode)</button>
+
+      <div class="license-key-section">
+        <p class="license-key-label">Already have a license key?</p>
+        <div class="license-key-row">
+          <input
+            type="text"
+            id="license-key-input"
+            placeholder="PAWCHEF-XXXX-XXXX-XXXX"
+            maxlength="22"
+            autocomplete="off"
+            spellcheck="false"
+            onkeydown="if(event.key==='Enter') redeemLicenseKey()"
+          />
+          <button class="license-key-btn" onclick="redeemLicenseKey()">Redeem</button>
+        </div>
+        <p class="license-key-error hidden" id="license-key-error"></p>
+      </div>
     </div>
   </div>
 
