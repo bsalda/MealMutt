@@ -1,3 +1,7 @@
+// LOCAL DEVELOPMENT SERVER ONLY.
+// This file is not used by GitHub Pages — GitHub Pages serves all static files
+// (HTML, CSS, JS, JSON, PNG, SVG) automatically with correct MIME types.
+// Use this only to preview the app locally: node server.js
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
