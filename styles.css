@@ -503,6 +503,14 @@ h4.unsafe { color: var(--danger); }
 .aafco-note.ok   { background: #f0fdf4; border-left: 3px solid #16a34a; color: #14532d; }
 .aafco-note.warn { background: var(--blue-light); border-left: 3px solid var(--blue); color: #1e3a8a; }
 
+.aafco-disclaimer {
+  font-size: .74rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  padding-top: .85rem;
+  margin-bottom: .85rem;
+}
 .aafco-actions { display: flex; flex-wrap: wrap; gap: .75rem; }
 
 /* ===== ACTIVITY IMAGE ICONS ===== */

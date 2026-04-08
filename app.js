@@ -476,7 +476,7 @@ async function selectRecipe(id) {
   $("aafco-body").innerHTML = `
     <div class="aafco-loading">
       <div class="aafco-spinner"></div>
-      <p>Fetching ingredient data from USDA &amp; verifying AAFCO guidelines…</p>
+      <p>Fetching ingredient data from USDA &amp; checking 5 key nutrients against AAFCO minimums…</p>
     </div>`;
   show("section-aafco");
   $("section-aafco").scrollIntoView({ behavior: "smooth", block: "start" });
@@ -509,11 +509,11 @@ function renderAafcoResult(recipe, result) {
   } else if (result.compliant) {
     badge.textContent = "✅ Passed";
     badge.style.background = "#16a34a";
-    title.textContent = "AAFCO Guidelines Met";
+    title.textContent = "Nutrition Check Passed";
     body.innerHTML = `
       <p class="aafco-profile">Standard: <strong>${result.profileName}</strong></p>
       ${aafcoChecksHTML(result.checks)}
-      <p class="aafco-note ok">This recipe meets AAFCO minimum standards for protein and fat. For a fully balanced diet, rotate proteins weekly and consider a vet-approved vitamin supplement.</p>
+      <p class="aafco-note ok">This recipe meets AAFCO minimums for protein, fat, calcium, phosphorus, and vitamin A (5 of 37+ nutrients). For complete nutritional balance, rotate proteins weekly and consult a board-certified veterinary nutritionist.</p>
       ${aafcoActions("View Recipe →")}`;
 
   } else {
@@ -524,7 +524,7 @@ function renderAafcoResult(recipe, result) {
     body.innerHTML = `
       <p class="aafco-profile">Standard: <strong>${result.profileName}</strong></p>
       ${aafcoChecksHTML(result.checks)}
-      <p class="aafco-note warn"><strong>${failing}</strong> ${result.checks.filter(c=>!c.pass).length > 1 ? "are" : "is"} below the AAFCO minimum for your dog's life stage. Consider adding a vet-approved supplement or rotating with a higher-protein recipe.</p>
+      <p class="aafco-note warn"><strong>${failing}</strong> ${result.checks.filter(c=>!c.pass).length > 1 ? "are" : "is"} below the AAFCO minimum for your dog's life stage. This check covers 5 key nutrients — consult a veterinary nutritionist for a complete assessment. Consider adding a vet-approved supplement or adjusting ingredients.</p>
       ${aafcoActions("View Anyway →")}`;
   }
 
@@ -561,7 +561,9 @@ function aafcoChecksHTML(checks) {
 }
 
 function aafcoActions(proceedLabel = "View Recipe →") {
-  return `<div class="aafco-actions">
+  return `
+  <p class="aafco-disclaimer">${AAFCO_DISCLAIMER}</p>
+  <div class="aafco-actions">
     <button class="btn-secondary" id="aafco-back">← Back to Recipes</button>
     <button class="btn-primary"   id="aafco-proceed">${proceedLabel}</button>
   </div>`;

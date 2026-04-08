@@ -8,11 +8,14 @@
 
 // USDA Nutrient IDs (per 100g)
 const NUTRIENT_IDS = {
-  calories: 1008,
-  protein:  1003,
-  fat:      1004,
-  carbs:    1005,
-  fiber:    1079,
+  calories:   1008,
+  protein:    1003,
+  fat:        1004,
+  carbs:      1005,
+  fiber:      1079,
+  calcium:    1087,   // mg per 100g
+  phosphorus: 1091,   // mg per 100g
+  vitaminA:   1104,   // IU per 100g
 };
 
 // ---- Ingredient → USDA FDC ID map ----
@@ -118,17 +121,20 @@ function calcContrib(per100g, qty, unit) {
   if (!gramsPerUnit) return null;
   const factor = (qty * gramsPerUnit) / 100;
   return {
-    calories: per100g.calories * factor,
-    protein:  per100g.protein  * factor,
-    fat:      per100g.fat      * factor,
-    carbs:    per100g.carbs    * factor,
-    fiber:    per100g.fiber    * factor,
+    calories:   per100g.calories   * factor,
+    protein:    per100g.protein    * factor,
+    fat:        per100g.fat        * factor,
+    carbs:      per100g.carbs      * factor,
+    fiber:      per100g.fiber      * factor,
+    calcium:    per100g.calcium    * factor,   // mg
+    phosphorus: per100g.phosphorus * factor,   // mg
+    vitaminA:   per100g.vitaminA   * factor,   // IU
   };
 }
 
 // ---- PUBLIC: fetch live nutrition for a whole recipe ----
 async function usdaRecipeNutrition(recipe, multiplier = 1) {
-  const totals  = { calories: 0, protein: 0, fat: 0, carbs: 0, fiber: 0 };
+  const totals  = { calories: 0, protein: 0, fat: 0, carbs: 0, fiber: 0, calcium: 0, phosphorus: 0, vitaminA: 0 };
   let   matched = 0;
 
   await Promise.all(recipe.ingredients.map(async ing => {
@@ -139,22 +145,28 @@ async function usdaRecipeNutrition(recipe, multiplier = 1) {
       const contrib  = calcContrib(per100g, ing.qty * multiplier, ing.unit);
       if (!contrib) return;
       matched++;
-      totals.calories += contrib.calories;
-      totals.protein  += contrib.protein;
-      totals.fat      += contrib.fat;
-      totals.carbs    += contrib.carbs;
-      totals.fiber    += contrib.fiber;
+      totals.calories   += contrib.calories;
+      totals.protein    += contrib.protein;
+      totals.fat        += contrib.fat;
+      totals.carbs      += contrib.carbs;
+      totals.fiber      += contrib.fiber;
+      totals.calcium    += contrib.calcium;
+      totals.phosphorus += contrib.phosphorus;
+      totals.vitaminA   += contrib.vitaminA;
     } catch (err) {
       console.warn(`[USDA] Skipped "${ing.item}":`, err.message);
     }
   }));
 
   return {
-    calories: Math.round(totals.calories),
-    protein:  +(totals.protein.toFixed(1)),
-    fat:      +(totals.fat.toFixed(1)),
-    carbs:    +(totals.carbs.toFixed(1)),
-    fiber:    +(totals.fiber.toFixed(1)),
+    calories:   Math.round(totals.calories),
+    protein:    +(totals.protein.toFixed(1)),
+    fat:        +(totals.fat.toFixed(1)),
+    carbs:      +(totals.carbs.toFixed(1)),
+    fiber:      +(totals.fiber.toFixed(1)),
+    calcium:    +(totals.calcium.toFixed(1)),     // mg
+    phosphorus: +(totals.phosphorus.toFixed(1)),  // mg
+    vitaminA:   +(totals.vitaminA.toFixed(0)),    // IU
     matched,
   };
 }
