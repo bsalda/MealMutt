@@ -1,14 +1,10 @@
 // ===================================================
-//  PawChef — USDA FoodData Central API Integration
-//  Free API: https://fdc.nal.usda.gov/
-//  DEMO_KEY = 30 requests/hr (testing only)
-//  Get a FREE personal key at: https://fdc.nal.usda.gov/api-key-signup.html
+//  MealMutt — USDA FoodData Central API Integration
+//  Requests are proxied through /api/usda (Vercel serverless function).
+//  The API key lives in USDA_API_KEY env var on Vercel — never in client JS.
 // ===================================================
 
-const USDA_CONFIG = {
-  apiKey:  'qn1PcnO0gLWmkAD7pfZYrQ7upedyGuTio64ydNHK', // ← Replace with your free key for higher limits
-  baseUrl: 'https://api.nal.usda.gov/fdc/v1',
-};
+const USDA_PROXY = '/api/usda';
 
 // USDA Nutrient IDs (per 100g)
 const NUTRIENT_IDS = {
@@ -57,7 +53,7 @@ const UNIT_GRAMS = {
 };
 
 // ---- LocalStorage Cache (7-day TTL) ----
-const CACHE_KEY = 'pawchef_usda_v1';
+const CACHE_KEY = 'mealmutt_usda_v1';
 const CACHE_TTL = 7 * 24 * 60 * 60 * 1000;
 
 function cacheRead() {
@@ -88,7 +84,7 @@ async function usdaFetchFood(fdcId) {
   const cache = cacheRead();
   if (cache[fdcId]) return cache[fdcId].nutrients;
 
-  const url = `${USDA_CONFIG.baseUrl}/food/${fdcId}?api_key=${USDA_CONFIG.apiKey}`;
+  const url = `${USDA_PROXY}?fdcId=${fdcId}`;
   const res  = await fetch(url);
   if (!res.ok) throw new Error(`USDA ${res.status} — FDC ID ${fdcId}`);
   const data = await res.json();
