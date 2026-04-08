@@ -1,10 +1,10 @@
 // ===================================================
-//  MealMutt — USDA FoodData Central API Integration
-//  Requests are proxied through /api/usda (Vercel serverless function).
-//  The API key lives in USDA_API_KEY env var on Vercel — never in client JS.
+//  MealMutt — USDA FoodData Central Integration
+//  API key is now stored server-side in a Vercel
+//  serverless function at /api/usda
 // ===================================================
 
-const USDA_PROXY = '/api/usda';
+// No API key here — it lives in Vercel Environment Variables
 
 // USDA Nutrient IDs (per 100g)
 const NUTRIENT_IDS = {
@@ -79,14 +79,15 @@ function cacheWrite(fdcId, nutrients) {
   } catch {}
 }
 
-// ---- Fetch one food from USDA (with cache) ----
+// ---- Fetch one food via YOUR serverless proxy (with cache) ----
 async function usdaFetchFood(fdcId) {
   const cache = cacheRead();
   if (cache[fdcId]) return cache[fdcId].nutrients;
 
-  const url = `${USDA_PROXY}?fdcId=${fdcId}`;
-  const res  = await fetch(url);
-  if (!res.ok) throw new Error(`USDA ${res.status} — FDC ID ${fdcId}`);
+  // Calls YOUR server, not USDA directly — API key stays hidden
+  const url = `/api/usda?fdcId=${fdcId}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`USDA proxy ${res.status} — FDC ID ${fdcId}`);
   const data = await res.json();
 
   // Handle both Foundation/SR Legacy and Branded Foods response shapes
