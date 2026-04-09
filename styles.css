@@ -4,6 +4,30 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* ===== SKIP LINK ===== */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip-link:focus {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  width: auto;
+  height: auto;
+  padding: 8px 16px;
+  background: #be5a38;
+  color: #fff;
+  font-weight: 600;
+  z-index: 10000;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
 :root {
   --primary:      #be5a38; /* interactive elements & large text only — not small body text */
   --primary-dark: #a34a2a;
