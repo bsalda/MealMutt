@@ -830,6 +830,16 @@ h4.unsafe { color: var(--danger); }
   color: var(--text-muted);
   margin-bottom: .45rem;
 }
+.license-key-toggle { cursor: pointer; }
+.license-key-toggle summary {
+  list-style: none;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: .85rem;
+}
+.license-key-toggle summary::-webkit-details-marker { display: none; }
+.license-key-toggle summary::after { content: " ▸"; }
+.license-key-toggle[open] summary::after { content: " ▾"; }
 .license-key-row {
   display: flex;
   gap: .5rem;

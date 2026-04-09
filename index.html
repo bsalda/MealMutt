@@ -422,6 +422,7 @@
       seniors, or dogs with health conditions.
     </p>
     <nav class="footer-links" aria-label="Legal">
+      <a href="about.html">About</a> ·
       <a href="privacy.html">Privacy Policy</a> ·
       <a href="terms.html">Terms of Use</a> ·
       <a href="refund.html">Refund Policy</a>
@@ -464,20 +465,22 @@
       <p class="upgrade-secure">🔒 Secure payment via Stripe · Cancel anytime</p>
 
       <div class="license-key-section">
-        <p class="license-key-label">Already have a license key?</p>
-        <div class="license-key-row">
-          <input
-            type="text"
-            id="license-key-input"
-            placeholder="MEALMUTT-XXXX-XXXX-XXXX"
-            maxlength="22"
-            autocomplete="off"
-            spellcheck="false"
-            onkeydown="if(event.key==='Enter') redeemLicenseKey()"
-          />
-          <button class="license-key-btn" onclick="redeemLicenseKey()">Redeem</button>
-        </div>
-        <p class="license-key-error hidden" id="license-key-error"></p>
+        <details class="license-key-toggle">
+          <summary class="license-key-label">Already have a license key?</summary>
+          <div class="license-key-row">
+            <input
+              type="text"
+              id="license-key-input"
+              placeholder="MEALMUTT-XXXX-XXXX-XXXX"
+              maxlength="22"
+              autocomplete="off"
+              spellcheck="false"
+              onkeydown="if(event.key==='Enter') redeemLicenseKey()"
+            />
+            <button class="license-key-btn" onclick="redeemLicenseKey()">Redeem</button>
+          </div>
+          <p class="license-key-error hidden" id="license-key-error"></p>
+        </details>
       </div>
     </div>
   </div>
