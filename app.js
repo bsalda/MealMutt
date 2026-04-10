@@ -78,10 +78,13 @@ function updateProBanner() {
   const text = $("pro-status-text");
   const btn  = $("pro-status-btn");
   if (isPro()) {
+    bar.classList.remove("hidden");
     bar.classList.add("is-pro");
     text.innerHTML = "⭐ <strong>MealMutt Pro</strong> — All features unlocked";
     btn.classList.add("hidden");
   } else {
+    // Only show banner when user hits a locked recipe, not on load
+    bar.classList.add("hidden");
     bar.classList.remove("is-pro");
     text.innerHTML = "🆓 Free Plan — <strong>3 recipes included</strong>";
     btn.classList.remove("hidden");
@@ -89,6 +92,9 @@ function updateProBanner() {
 }
 
 function showUpgradeModal() {
+  // Show the status bar now — user has discovered the paywall naturally
+  const bar = $("pro-status-bar");
+  bar.classList.remove("hidden");
   $("upgrade-modal").classList.remove("hidden");
   document.body.style.overflow = "hidden";
 }
