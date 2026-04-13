@@ -2,7 +2,7 @@
 // External API calls (USDA FoodData Central, EmailJS, Stripe) are never
 // intercepted and always go directly to the network.
 
-const CACHE_NAME = 'mealmutt-static-v3';
+const CACHE_NAME = 'mealmutt-static-v4';
 
 const STATIC_ASSETS = [
   '/',

@@ -45,6 +45,8 @@ const INGREDIENT_MAP = [
   { keywords: ['celery'],                       fdcId: 169988 },
   { keywords: ['cucumber'],                     fdcId: 168409 },
   { keywords: ['coconut oil'],                  fdcId: 172336 },
+  { keywords: ['eggshell powder', 'eggshell'], fdcId: 2346009 },
+  { keywords: ['wheat germ oil', 'wheat germ'], fdcId: 172420 },
 ];
 
 // Unit → grams conversion
