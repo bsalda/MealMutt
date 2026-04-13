@@ -313,6 +313,7 @@ document.querySelectorAll(".activity-btn").forEach(btn => {
 
 // ---- Calculate ----
 $("btn-calculate").addEventListener("click", () => {
+  gtag("event", "calculate_clicked");
   const name   = $("dog-name").value.trim();
   const weight = parseFloat($("dog-weight").value);
   const age    = $("dog-age").value;
@@ -463,6 +464,7 @@ document.addEventListener("keydown", e => {
 async function selectRecipe(id) {
   const recipe = RECIPES.find(r => r.id === id);
   if (!recipe) return;
+  gtag("event", "recipe_selected", { recipe_name: recipe.name });
 
   // Gate Pro recipes
   if (!isPro() && !FREE_RECIPE_IDS.includes(id)) {
@@ -510,6 +512,7 @@ function renderAafcoResult(recipe, result) {
     title.textContent = "Compliance Check Unavailable";
     body.innerHTML = `
       <p class="aafco-note warn">Could not fetch USDA data right now (network or rate-limit). You can still view the recipe.</p>
+      ${aafcoCompleteSection(state.weightLbs)}
       ${aafcoActions()}`;
 
   } else if (result.compliant) {
@@ -531,6 +534,7 @@ function renderAafcoResult(recipe, result) {
       <p class="aafco-profile">Standard: <strong>${result.profileName}</strong></p>
       ${aafcoChecksHTML(result.checks)}
       <p class="aafco-note warn"><strong>${failing}</strong> ${result.checks.filter(c=>!c.pass).length > 1 ? "are" : "is"} below the AAFCO minimum for your dog's life stage. This check covers 5 key nutrients — consult a veterinary nutritionist for a complete assessment. Consider adding a vet-approved supplement or adjusting ingredients.</p>
+      ${aafcoCompleteSection(state.weightLbs)}
       ${aafcoActions("View Anyway →")}`;
   }
 
@@ -716,6 +720,7 @@ function showError(msg) {
 // ---- Affiliate link map per supplement ----
 const SUPP_AFFILIATE = {
   "eggshell-powder":   { amazon: "organic+eggshell+powder+dogs", chewy: "eggshell+powder+dog" },
+  "wheat-germ-oil":    { amazon: "wheat+germ+oil+dogs+vitamin+e", chewy: "wheat+germ+oil+dog+supplement" },
   "greek-yogurt":      { amazon: "plain+greek+yogurt+probiotic+dog", chewy: "probiotic+yogurt+dog" },
   "nutritional-yeast": { amazon: "nutritional+yeast+dogs+B-vitamins", chewy: "nutritional+yeast+dog+supplement" },
   "kelp-powder":       { amazon: "organic+kelp+powder+dog+supplement", chewy: "kelp+supplement+dog" },
@@ -740,13 +745,14 @@ function suppAffiliateLinks(id) {
 
 // ---- Render Supplements ----
 function renderSupplements(aafcoResult) {
-  const grid = $("supp-grid");
+  const gridCompleter = $("supp-grid-completer");
+  const gridBooster   = $("supp-grid-booster");
   const suggested = suggestSupplements(aafcoResult);
 
-  grid.innerHTML = SUPPLEMENTS.map(s => {
-    const cat     = SUPPLEMENT_CATEGORIES[s.category];
-    const dose    = calcSupplementDose(s, state.weightLbs || 30);
-    const isSugg  = suggested.includes(s.id);
+  const renderCard = s => {
+    const cat    = SUPPLEMENT_CATEGORIES[s.category];
+    const dose   = calcSupplementDose(s, state.weightLbs || 30);
+    const isSugg = suggested.includes(s.id);
     return `
     <div class="supp-card ${isSugg ? "supp-suggested" : ""}" id="supp-${s.id}">
       <div class="supp-card-top">
@@ -768,7 +774,10 @@ function renderSupplements(aafcoResult) {
         <p class="supp-warning">${s.warning}</p>
       </details>
     </div>`;
-  }).join("");
+  };
+
+  gridCompleter.innerHTML = SUPPLEMENTS.filter(s => s.tier === "completer").map(renderCard).join("");
+  gridBooster.innerHTML   = SUPPLEMENTS.filter(s => s.tier === "booster").map(renderCard).join("");
 }
 
 // ---- Toggle supplement on/off ----

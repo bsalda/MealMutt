@@ -10,6 +10,7 @@ const SUPPLEMENTS = [
     name: "Eggshell Powder",
     emoji: "🥚",
     category: "mineral",
+    tier: "completer",
     primaryNutrient: "Calcium",
     benefit: "Highly bioavailable calcium carbonate for strong bones, teeth & muscle function.",
     dosage: { qty: 0.125, unit: "tsp", per: 10 },
@@ -18,10 +19,24 @@ const SUPPLEMENTS = [
     keyNutrients: { calcium: 360, protein: 0.1, fat: 0, fiber: 0, omega3: 0 },
   },
   {
+    id: "wheat-germ-oil",
+    name: "Wheat Germ Oil",
+    emoji: "🌾",
+    category: "vitamin",
+    tier: "completer",
+    primaryNutrient: "Vitamin E",
+    benefit: "Most concentrated natural source of vitamin E — critical antioxidant that protects cell membranes. Commonly deficient in cooked homemade dog food because heat destroys vitamin E.",
+    dosage: { qty: 1, unit: "tsp", per: 30 },
+    prepNote: "Use cold-pressed, unrefined wheat germ oil. Add AFTER cooking — heat destroys vitamin E. Drizzle directly onto cooled food before serving. Refrigerate after opening.",
+    warning: "Do not cook or heat — destroys the vitamin E content entirely. Not suitable for dogs with wheat gluten sensitivity. Refrigerate and discard if it smells rancid.",
+    keyNutrients: { calcium: 0, protein: 0, fat: 4.5, fiber: 0, omega3: 55 },
+  },
+  {
     id: "greek-yogurt",
     name: "Greek Yogurt",
     emoji: "🫙",
     category: "probiotic",
+    tier: "booster",
     primaryNutrient: "Probiotics",
     benefit: "Supports gut health, boosts immunity, and restores beneficial intestinal flora.",
     dosage: { qty: 1, unit: "tsp", per: 10 },
@@ -34,6 +49,7 @@ const SUPPLEMENTS = [
     name: "Nutritional Yeast",
     emoji: "🟡",
     category: "vitamin",
+    tier: "completer",
     primaryNutrient: "B-Complex Vitamins",
     benefit: "Complete B-vitamin spectrum (B1, B2, B3, B6, B12) plus all essential amino acids for energy, nerves & coat.",
     dosage: { qty: 0.5, unit: "tsp", per: 10 },
@@ -46,6 +62,7 @@ const SUPPLEMENTS = [
     name: "Kelp Powder",
     emoji: "🌿",
     category: "mineral",
+    tier: "completer",
     primaryNutrient: "Iodine",
     benefit: "Supports thyroid function, metabolism, dental plaque reduction, and skin & coat health via natural minerals.",
     dosage: { qty: 0.125, unit: "tsp", per: 10 },
@@ -58,6 +75,7 @@ const SUPPLEMENTS = [
     name: "Pumpkin Seeds (Ground)",
     emoji: "🎃",
     category: "mineral",
+    tier: "completer",
     primaryNutrient: "Zinc & Magnesium",
     benefit: "Provides zinc for immune function & wound healing, magnesium for cardiac health, and healthy unsaturated fats.",
     dosage: { qty: 1, unit: "tsp", per: 10 },
@@ -70,6 +88,7 @@ const SUPPLEMENTS = [
     name: "Bone Broth",
     emoji: "🍲",
     category: "mineral",
+    tier: "booster",
     primaryNutrient: "Collagen & Glucosamine",
     benefit: "Lubricates and repairs joints, supports intestinal lining via gelatin, and aids liver detoxification with glycine.",
     dosage: { qty: 1.5, unit: "tbsp", per: 10 },
@@ -82,6 +101,7 @@ const SUPPLEMENTS = [
     name: "Chia Seeds (Soaked)",
     emoji: "🫧",
     category: "omega",
+    tier: "booster",
     primaryNutrient: "Omega-3 (ALA) & Fiber",
     benefit: "Reduces inflammation, supports skin & joints, and feeds beneficial gut bacteria via soluble fiber.",
     dosage: { qty: 0.25, unit: "tsp", per: 10 },
@@ -94,6 +114,7 @@ const SUPPLEMENTS = [
     name: "Turmeric (Golden Paste)",
     emoji: "🟠",
     category: "antioxidant",
+    tier: "booster",
     primaryNutrient: "Curcumin",
     benefit: "Reduces joint inflammation, supports immune defense, and may protect against cognitive decline in senior dogs.",
     dosage: { qty: 0.125, unit: "tsp", per: 10 },
@@ -106,6 +127,7 @@ const SUPPLEMENTS = [
     name: "Ground Flaxseed",
     emoji: "🌾",
     category: "omega",
+    tier: "completer",
     primaryNutrient: "Omega-3 (ALA) & Fiber",
     benefit: "Reduces inflammation linked to arthritis & skin conditions, while fiber supports healthy digestion and bowel regularity.",
     dosage: { qty: 0.375, unit: "tsp", per: 10 },
@@ -118,6 +140,7 @@ const SUPPLEMENTS = [
     name: "Spirulina",
     emoji: "💚",
     category: "antioxidant",
+    tier: "booster",
     primaryNutrient: "Complete Protein & Antioxidants",
     benefit: "Strengthens immune response, protects cells from oxidative stress, and supports heavy metal detoxification.",
     dosage: { qty: 0.25, unit: "tsp", per: 10 },
@@ -171,6 +194,12 @@ function suggestSupplements(aafcoResult) {
     }
     if (failing.includes("calcium")) {
       suggestions.add("eggshell-powder");
+    }
+    if (!aafcoResult.compliant) {
+      suggestions.add("eggshell-powder");
+      suggestions.add("wheat-germ-oil");
+      suggestions.add("kelp-powder");
+      suggestions.add("pumpkin-seeds");
     }
   }
 
