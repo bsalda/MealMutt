@@ -57,15 +57,17 @@ body {
   min-height: 100vh;
   color: var(--text);
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 /* ===== HEADER ===== */
 .header {
   background: linear-gradient(135deg, #a34a2a 0%, #be5a38 50%, #d4735a 100%);
   color: #fff;
-  padding: 2.5rem 1.5rem 2rem;
+  padding: 2.5rem 1.5rem .75rem;
   text-align: center;
-  box-shadow: 0 4px 20px rgba(190,90,56,.35);
+  box-shadow: none;
+  margin-bottom: 0;
 }
 .header-inner { max-width: 700px; margin: 0 auto; }
 .logo { display: flex; align-items: center; justify-content: center; gap: .75rem; margin-bottom: .4rem; }
@@ -1219,4 +1221,47 @@ h4.unsafe { color: var(--danger); }
   .logo-text { font-size: 1.6rem; }
   .safe-unsafe-grid { grid-template-columns: 1fr; }
   .results-hero { flex-direction: column; }
+}
+
+.tagline-new {
+  font-size: 1.25rem; font-weight: 700; color: #fff;
+  margin: .3rem 0 .4rem; line-height: 1.35;
+}
+.tagline-sub {
+  font-size: .88rem; color: rgba(255,255,255,0.82);
+  margin: 0 auto .5rem; max-width: 480px; line-height: 1.5;
+}
+.hero-preview {
+  background-color: #be5a38;
+  padding: .9rem 1rem 1rem;
+  text-align: center;
+  margin-top: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+}
+.hero-preview-label {
+  font-size: .68rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1px; color: rgba(255,255,255,0.55); margin-bottom: .55rem;
+}
+.recipe-preview-card {
+  background: #fff; border-radius: 14px; padding: .9rem 1rem;
+  max-width: 420px; margin: 0 auto .75rem; text-align: left;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+}
+.rpc-header { display: flex; align-items: center; gap: 8px; margin-bottom: .55rem; padding-bottom: .55rem; border-bottom: 1px solid #f0ebe6; }
+.rpc-emoji { font-size: 1.4rem; }
+.rpc-title { font-size: .9rem; font-weight: 700; color: var(--text); }
+.rpc-for { font-size: .72rem; color: var(--text-muted); }
+.rpc-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: .4rem; margin-bottom: .55rem; }
+.rpc-stat { background: var(--primary-light); border-radius: 8px; padding: .35rem .5rem; text-align: center; }
+.rpc-num { display: block; font-size: .95rem; font-weight: 800; color: var(--primary); }
+.rpc-lbl { display: block; font-size: .6rem; text-transform: uppercase; letter-spacing: .4px; color: var(--text-muted); }
+.rpc-ings { display: flex; flex-wrap: wrap; gap: .3rem; margin-bottom: .5rem; }
+.rpc-ing { font-size: .72rem; background: var(--surface); border-radius: 20px; padding: .18rem .55rem; color: var(--text); }
+.rpc-aafco { font-size: .72rem; color: #16a34a; font-weight: 600; }
+.hero-cta-nudge { font-size: .82rem; color: rgba(255,255,255,0.8); margin: 0; }
+.hero-free-badge {
+  background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 20px; padding: .2rem .7rem; font-size: .72rem; color: #fff; font-weight: 600;
 }
