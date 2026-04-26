@@ -549,7 +549,7 @@ function renderAafcoResult(recipe, result) {
       ${aafcoChecksHTML(result.checks)}
       <p class="aafco-note warn"><strong>${failing}</strong> ${result.checks.filter(c=>!c.pass).length > 1 ? "are" : "is"} below the AAFCO minimum for your dog's life stage. This check covers 5 key nutrients — consult a veterinary nutritionist for a complete assessment. Consider adding a vet-approved supplement or adjusting ingredients.</p>
       ${aafcoCompleteSection(state.weightLbs)}
-      ${aafcoActions("View Anyway →")}`;
+      ${aafcoActions("View Recipe →")}`;
   }
 
   // Wire buttons
