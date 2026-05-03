@@ -581,5 +581,45 @@
       });
     }
   </script>
+<!-- GA4 purchase tracking — fires on Stripe Checkout return -->
+<script>
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('purchase') !== 'success') return;
+
+  const plan = params.get('plan');
+  const sessionId = params.get('session_id');
+
+  const PLAN_PRICES = {
+    yearly:  { value: 39.00, name: 'MealMutt Pro Yearly',  id: 'mealmutt-pro-yearly'  },
+    monthly: { value: 4.99,  name: 'MealMutt Pro Monthly', id: 'mealmutt-pro-monthly' },
+  };
+
+  const planInfo = PLAN_PRICES[plan];
+  if (!planInfo) {
+    console.warn('[GA4] Unknown plan in success URL:', plan);
+    return;
+  }
+
+  if (window.gtag) {
+    gtag('event', 'purchase', {
+      transaction_id: sessionId || ('mealmutt-' + Date.now()),
+      value: planInfo.value,
+      currency: 'USD',
+      items: [{
+        item_id: planInfo.id,
+        item_name: planInfo.name,
+        price: planInfo.value,
+        quantity: 1,
+      }],
+    });
+    console.log('[GA4] purchase fired:', plan, planInfo.value);
+  }
+
+  if (window.history && window.history.replaceState) {
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+})();
+</script>
 </body>
 </html>
