@@ -73,7 +73,8 @@ function aafcoCompleteSection(weightLbs) {
   return `
   <div class="aafco-complete-box">
     <h4 style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.5rem;">🧩 Complete this recipe's nutrition</h4>
-    <p style="font-size:.85rem;color:var(--text-muted);line-height:1.5;margin-bottom:.75rem;">Homemade recipes are naturally low in certain minerals and vitamins that commercial kibble gets from synthetic premixes. Adding eggshell powder and wheat germ oil (already included in this recipe) helps — but for full AAFCO compliance, a vet-formulated mineral premix is the most reliable solution.</p>
+    <p class="complete-already-note">✅ <strong>Your recipe already includes eggshell powder and wheat germ oil</strong> — these cover part of the calcium and vitamin gap that homemade recipes typically have.</p>
+    <p style="font-size:.85rem;color:var(--text-muted);line-height:1.5;margin-bottom:.75rem;">If you want a one-stop solution, a vet-formulated premix covers everything in one product:</p>
     <div class="complete-products-grid">
       <div class="complete-product-card">
         <span class="complete-badge">Vet Formulated</span>

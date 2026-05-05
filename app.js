@@ -540,14 +540,13 @@ function renderAafcoResult(recipe, result) {
       ${aafcoActions("View Recipe →")}`;
 
   } else {
-    const failing = result.checks.filter(c => !c.pass).map(c => c.label).join(" & ");
-    badge.textContent = "⚠️ Below Minimum";
-    badge.style.background = "#d97706";
-    title.textContent = "Below AAFCO Minimum";
+    badge.textContent = "🌱 Add Mineral Boost";
+    badge.style.background = "#16a34a";
+    title.textContent = "One more step: complete the nutrition";
     body.innerHTML = `
       <p class="aafco-profile">Standard: <strong>${result.profileName}</strong></p>
       ${aafcoChecksHTML(result.checks)}
-      <p class="aafco-note warn"><strong>${failing}</strong> ${result.checks.filter(c=>!c.pass).length > 1 ? "are" : "is"} below the AAFCO minimum for your dog's life stage. This check covers 5 key nutrients — consult a veterinary nutritionist for a complete assessment. Consider adding a vet-approved supplement or adjusting ingredients.</p>
+      <p class="aafco-note">All homemade dog food — even vet-formulated recipes — needs a small mineral supplement to hit AAFCO standards. This is normal and expected, not a flaw in your recipe. Here's exactly what to add.</p>
       ${aafcoCompleteSection(state.weightLbs)}
       ${aafcoActions("View Recipe →")}`;
   }
@@ -574,7 +573,7 @@ function aafcoChecksHTML(checks) {
   return `<div class="aafco-checks">${checks.map(c => `
     <div class="aafco-check ${c.pass ? "pass" : "fail"}">
       <div class="aafco-check-header">
-        <span>${c.pass ? "✅" : "❌"}</span>
+        <span>${c.pass ? "✅" : "➕"}</span>
         <span class="aafco-check-label">${c.label}</span>
         <span class="aafco-check-value">${c.actual}${c.unit} &nbsp;/&nbsp; min ${c.min}${c.unit} per 1000 kcal</span>
       </div>

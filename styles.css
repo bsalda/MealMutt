@@ -501,7 +501,7 @@ h4.unsafe { color: var(--danger); }
   padding: .85rem 1rem;
 }
 .aafco-check.pass { border-color: #86efac; background: #f0fdf4; }
-.aafco-check.fail { border-color: #fca5a5; background: #fef2f2; }
+.aafco-check.fail { border-color: #fcd34d; background: #fffbeb; }
 
 .aafco-check-header {
   display: flex; align-items: center; gap: .6rem;
@@ -519,7 +519,7 @@ h4.unsafe { color: var(--danger); }
   transition: width .55s ease;
 }
 .aafco-bar-fill.pass { background: #16a34a; }
-.aafco-bar-fill.fail { background: #dc2626; }
+.aafco-bar-fill.fail { background: #f59e0b; }
 
 .aafco-note {
   font-size: .82rem; line-height: 1.55;
@@ -1184,6 +1184,17 @@ h4.unsafe { color: var(--danger); }
   margin-top: .75rem;
   font-style: italic;
   line-height: 1.5;
+}
+
+.complete-already-note {
+  font-size: .9rem;
+  color: var(--text);
+  line-height: 1.5;
+  margin-bottom: .85rem;
+  padding: .65rem .8rem;
+  background: #f0fdf4;
+  border-left: 3px solid #16a34a;
+  border-radius: 6px;
 }
 
 .complete-disclosure {
