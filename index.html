@@ -61,6 +61,72 @@
   <link rel="apple-touch-icon" href="/icons/icon-192.png" />
 
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- FAQ accordion: rotate "+" to "x" when open -->
+  <style>
+    details[open] summary span {
+      transform: rotate(45deg);
+      display: inline-block;
+    }
+  </style>
+
+  <!-- FAQ schema (Google rich results) -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is homemade dog food safe for dogs with food allergies?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For a lot of dogs with allergies, homemade food is genuinely the best path forward. You control every single ingredient, so there are no hidden fillers, no shared equipment warnings, no mystery proteins. The most common triggers are things your dog has eaten for years: chicken, beef, dairy, wheat, eggs, and soy. Switching to something your dog has never eaten before, like venison, rabbit, or duck, gives their immune system nothing to react to. The part most people miss is that a new protein alone does not make a recipe complete. Homemade food can clear up allergies and quietly cause bone problems at the same time if the calcium is off. Before starting an elimination diet, check with your vet, especially if your dog has been on the same food for a long time."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to add calcium to homemade dog food?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, and skipping it is the most common mistake people make when cooking for their dogs. Meat is naturally high in phosphorus and very low in calcium. When those two minerals are out of balance, the body compensates by pulling calcium from the bones. It does not show up right away, which is part of what makes it dangerous. The easiest fix is eggshell powder. One teaspoon of finely ground dried eggshell gives you roughly 2,000mg of calcium, which is enough to balance a full day of meals for a medium-sized dog. Bone meal works too, but quality varies between brands, so look for one tested for lead. Things like yogurt and broccoli do have some calcium, but nowhere near enough to balance a meat-based diet on their own."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can homemade dog food help with acid reflux or chronic vomiting?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It can help a lot, but it depends on what is actually causing the problem. Acid reflux in dogs usually comes from one of three things: an empty stomach, a meal that is too high in fat, or a food sensitivity. Homemade food gives you control over all three. The approach that tends to work best is smaller meals more often, lower overall fat content, and a single protein that is easy to digest. High-fat proteins like beef, pork, and salmon are the most common dietary triggers, and added oils can do it too. If your dog vomits yellow bile in the early morning before their first meal, that is usually a stomach acid problem overnight, and a small snack before bed often fixes it faster than any recipe change. If vomiting is frequent or your dog is losing weight, see a vet before changing the diet."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I know if a homemade dog food recipe is nutritionally complete?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Honestly, most recipes people find online are not complete. Vet-approved and popular do not mean balanced. Most homemade recipes are missing at least one critical nutrient, and calcium is the most common gap, followed by zinc and vitamin D. The benchmark used in the US is the AAFCO Dog Food Nutrient Profiles, the same standards commercial dog food has to meet to be sold as complete and balanced. Checking all of this by hand means looking up the nutrient content of every ingredient by weight for every batch you make, which is why most people skip it. MealMutt connects to the USDA FoodData Central database and checks 5 key nutrients against AAFCO minimums for your dog's specific weight and age. No tool covers all 37 or more AAFCO nutrients, and we are upfront about that."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much homemade food should I feed my dog per day?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The standard starting point is 2 to 3 percent of your dog's body weight in food per day. For a 50 lb dog that works out to roughly 16 oz of food daily. Puppies need more food per pound than adults because they are growing fast. Senior dogs usually need fewer calories. A dog that runs off-leash every day needs more than one that mostly naps. Caloric density matters just as much as portion size. A chicken and rice bowl has a very different calorie count per ounce than a beef and sweet potato recipe, so two dogs eating the same amount by weight could be getting very different amounts of energy. The numbers are a starting point. The real gauge is your dog's body condition. You should be able to feel the ribs without pressing hard, but not see them."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which proteins are least likely to cause allergies in dogs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The proteins most likely to cause reactions are the ones your dog has eaten the longest: chicken and beef. Food allergies develop through repeated exposure over time, and those two proteins are in almost everything. Novel proteins work better for allergy dogs because the immune system has nothing to react to yet. The most commonly recommended options for elimination diets are venison, rabbit, duck, and whitefish like cod or tilapia. Turkey is often a good middle-ground option since it is less common in commercial foods than chicken. Lamb used to be the go-to novel protein but it has shown up in enough commercial foods over the years that it no longer offers the same reliability. Worth knowing: a true food allergy is an immune response, which is different from a food intolerance, which is a digestive sensitivity. A dog that reacts to beef might actually be reacting to the fat content, not the protein, and switching to a leaner cut sometimes resolves it without changing proteins at all."
+      }
+    }
+  ]
+}
+  </script>
 </head>
 <body>
 
@@ -446,6 +512,247 @@
           <button class="btn-primary" id="btn-print">🖨️ Print This Recipe</button>
         </div>
       </div>
+    </section>
+
+    <!--
+      MealMutt FAQ Section
+      Matches MealMutt design system: terracotta #BE5A38, green #4D7C0F, system font stack.
+      Each question targets a real search query. Do not shorten the answers — length = SEO signal.
+    -->
+    <section id="faq" style="
+      max-width: 740px;
+      margin: 3rem auto;
+      padding: 0 1.25rem 3rem;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    ">
+
+      <h2 style="
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 0.5rem;
+      ">Common Questions About Homemade Dog Food</h2>
+
+      <p style="
+        color: #555;
+        font-size: 0.95rem;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+      ">Real answers to the questions dog owners ask most, especially when switching to homemade.</p>
+
+      <!-- FAQ ITEM 1 -->
+      <details style="border-top: 1px solid #e5e5e5; padding: 1.1rem 0;">
+        <summary style="
+          font-weight: 600;
+          font-size: 1rem;
+          color: #1a1a1a;
+          cursor: pointer;
+          list-style: none;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 1rem;
+        ">
+          Is homemade dog food safe for dogs with food allergies?
+          <span style="color: #BE5A38; font-size: 1.25rem; flex-shrink: 0;">+</span>
+        </summary>
+        <div style="
+          margin-top: 0.85rem;
+          color: #444;
+          font-size: 0.95rem;
+          line-height: 1.75;
+        ">
+          <p>For a lot of dogs with allergies, homemade food is genuinely the best path forward. Not because it's trendy, but because you control every single ingredient. No shared equipment warnings, no "may contain" fine print, no mystery fillers. You know exactly what went into the bowl.</p>
+
+          <p style="margin-top: 0.75rem;">The most common triggers are proteins your dog has eaten for years: chicken, beef, dairy, wheat, eggs, and soy. They show up in nearly every commercial food, which makes avoiding them on kibble nearly impossible. Switching to something your dog has never eaten before, like venison, rabbit, or duck, gives their immune system nothing to react to. That's the idea behind a novel protein diet.</p>
+
+          <p style="margin-top: 0.75rem;">The part most people miss is that a new protein alone doesn't make a recipe complete. Homemade food can clear up allergies and quietly cause bone problems at the same time if the calcium isn't right. That's why nutrition still matters even when you're cooking specifically for sensitivities. MealMutt checks every recipe against AAFCO minimums for 5 key nutrients and flags which supplements fill the most common gaps.</p>
+
+          <p style="margin-top: 0.75rem; color: #BE5A38; font-size: 0.875rem;">Before starting an elimination diet, check with your vet, especially if your dog has been on the same food for a long time. Some reactions aren't food-related at all.</p>
+        </div>
+      </details>
+
+      <!-- FAQ ITEM 2 -->
+      <details style="border-top: 1px solid #e5e5e5; padding: 1.1rem 0;">
+        <summary style="
+          font-weight: 600;
+          font-size: 1rem;
+          color: #1a1a1a;
+          cursor: pointer;
+          list-style: none;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 1rem;
+        ">
+          Do I need to add calcium to homemade dog food?
+          <span style="color: #BE5A38; font-size: 1.25rem; flex-shrink: 0;">+</span>
+        </summary>
+        <div style="
+          margin-top: 0.85rem;
+          color: #444;
+          font-size: 0.95rem;
+          line-height: 1.75;
+        ">
+          <p>Yes, and skipping it is the most common mistake people make when cooking for their dogs. Meat is naturally high in phosphorus and very low in calcium. When those two minerals are out of balance, the body compensates by pulling calcium from the bones. It doesn't show up right away, which is part of what makes it dangerous. By the time you notice something is wrong, months of damage may have already happened.</p>
+
+          <p style="margin-top: 0.75rem;">The easiest fix is eggshell powder. One teaspoon of finely ground dried eggshell gives you roughly 2,000mg of calcium, which is enough to balance a full day of meals for a medium-sized dog. You can make it yourself by baking clean shells at 200°F for about 10 minutes until they're completely dry, then grinding them into a fine powder. Or you can buy it ready-made if you'd rather not bother.</p>
+
+          <p style="margin-top: 0.75rem;">Bone meal works too, but the quality varies a lot between brands. If you go that route, look for one that's been tested for lead. Things like yogurt, cheese, and broccoli do have some calcium, but nowhere near enough to balance a meat-based diet on their own. People assume they're covered because they added a spoonful of yogurt. They're not.</p>
+
+          <p style="margin-top: 0.75rem;">MealMutt includes eggshell powder in the supplement section of every recipe and calculates the exact amount based on how much food your dog eats daily.</p>
+
+          <p style="margin-top: 0.75rem; color: #BE5A38; font-size: 0.875rem;">If your dog has kidney disease, calcium supplementation needs special guidance. Talk to your vet before adding anything.</p>
+        </div>
+      </details>
+
+      <!-- FAQ ITEM 3 -->
+      <details style="border-top: 1px solid #e5e5e5; padding: 1.1rem 0;">
+        <summary style="
+          font-weight: 600;
+          font-size: 1rem;
+          color: #1a1a1a;
+          cursor: pointer;
+          list-style: none;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 1rem;
+        ">
+          Can homemade dog food help with acid reflux or chronic vomiting?
+          <span style="color: #BE5A38; font-size: 1.25rem; flex-shrink: 0;">+</span>
+        </summary>
+        <div style="
+          margin-top: 0.85rem;
+          color: #444;
+          font-size: 0.95rem;
+          line-height: 1.75;
+        ">
+          <p>It can help a lot, but it depends on what's actually causing the problem. Acid reflux in dogs, sometimes called bilious vomiting syndrome, usually comes from one of three things: an empty stomach, a meal that's too high in fat, or a food sensitivity. Homemade food gives you control over all three of those, which is why a lot of owners see real improvement after switching.</p>
+
+          <p style="margin-top: 0.75rem;">For dogs that reflux regularly, the approach that tends to work best is smaller meals more often, lower overall fat content, and a single protein that's easy to digest. Chicken and rice is the classic starting point because both are gentle on the stomach. Turkey, rabbit, and lamb are solid alternatives if chicken is already a problem for your dog.</p>
+
+          <p style="margin-top: 0.75rem;">High-fat proteins like beef, pork, and salmon are the most common dietary triggers. Oils added to the bowl can do it too, even healthy ones. If your dog specifically vomits yellow bile in the early morning before their first meal, that's usually a stomach-acid-at-night problem rather than a food issue. A small snack before bed, even just a few kibbles, often fixes it faster than any recipe change.</p>
+
+          <p style="margin-top: 0.75rem;">If the vomiting is frequent, getting worse, or your dog is losing weight alongside it, see a vet before changing the diet. Reflux can occasionally be a sign of something more serious like pancreatitis or an esophageal issue.</p>
+
+          <p style="margin-top: 0.75rem; color: #4D7C0F; font-size: 0.875rem;">MealMutt lets you filter recipes by protein and flag sensitive stomach as a health condition. The portioning adjusts accordingly.</p>
+        </div>
+      </details>
+
+      <!-- FAQ ITEM 4 -->
+      <details style="border-top: 1px solid #e5e5e5; padding: 1.1rem 0;">
+        <summary style="
+          font-weight: 600;
+          font-size: 1rem;
+          color: #1a1a1a;
+          cursor: pointer;
+          list-style: none;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 1rem;
+        ">
+          How do I know if a homemade recipe is nutritionally complete?
+          <span style="color: #BE5A38; font-size: 1.25rem; flex-shrink: 0;">+</span>
+        </summary>
+        <div style="
+          margin-top: 0.85rem;
+          color: #444;
+          font-size: 0.95rem;
+          line-height: 1.75;
+        ">
+          <p>Honestly, most of the recipes people find online aren't. "Vet-approved" and "popular" don't mean balanced. A vet signing off on an ingredient list is very different from a recipe being tested against actual nutritional standards. Most homemade recipes are missing at least one critical nutrient, and calcium is the most common gap, followed by zinc and vitamin D.</p>
+
+          <p style="margin-top: 0.75rem;">The benchmark used in the US is the AAFCO Dog Food Nutrient Profiles. Those are the same standards commercial dog food has to meet to be sold as "complete and balanced." A recipe that genuinely meets those minimums for protein, fat, calcium, phosphorus, and key vitamins is in a different category from one that just looks healthy.</p>
+
+          <p style="margin-top: 0.75rem;">The hard part is that checking all of this by hand means looking up the exact nutrient content of every ingredient by weight for every batch you make. Most people don't do it, not because they don't care but because it's genuinely tedious. MealMutt connects to the USDA FoodData Central database and does that math automatically, checking 5 key nutrients against AAFCO minimums for your dog's specific weight and age.</p>
+
+          <p style="margin-top: 0.75rem;">Honest caveat: no tool covers all 37 or more AAFCO nutrients, including this one. For a dog eating homemade food as their only diet long-term, a consultation with a board-certified veterinary nutritionist is a worthwhile investment. They can run a full analysis and catch things that any calculator will miss.</p>
+
+          <p style="margin-top: 0.75rem; color: #4D7C0F; font-size: 0.875rem;">MealMutt checks 5 of 37+ AAFCO nutrients. We're upfront about that, and the supplement guide addresses the most common gaps that home cooking leaves behind.</p>
+        </div>
+      </details>
+
+      <!-- FAQ ITEM 5 -->
+      <details style="border-top: 1px solid #e5e5e5; padding: 1.1rem 0;">
+        <summary style="
+          font-weight: 600;
+          font-size: 1rem;
+          color: #1a1a1a;
+          cursor: pointer;
+          list-style: none;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 1rem;
+        ">
+          How much homemade food should I feed my dog per day?
+          <span style="color: #BE5A38; font-size: 1.25rem; flex-shrink: 0;">+</span>
+        </summary>
+        <div style="
+          margin-top: 0.85rem;
+          color: #444;
+          font-size: 0.95rem;
+          line-height: 1.75;
+        ">
+          <p>The standard starting point is 2 to 3 percent of your dog's body weight in food per day. For a 50 lb dog that works out to roughly 16 oz of food daily. But that number is a starting point, not a rule. Age, activity level, and body condition all shift it significantly.</p>
+
+          <p style="margin-top: 0.75rem;">Puppies need more food per pound than adults because they're growing fast. Senior dogs usually need fewer calories but often benefit from more attention to joint-supportive nutrients. A dog that runs off-leash every day needs more than one that mostly naps. An overweight dog should start at the lower end of the range and be reassessed every few weeks based on actual weight change, not guesswork.</p>
+
+          <p style="margin-top: 0.75rem;">Caloric density matters just as much as portion size. A chicken and rice bowl has a very different calorie count per ounce than a beef and sweet potato recipe. Two dogs eating the same amount of food by weight could be getting very different amounts of energy depending on what's in the recipe. That's why knowing the calories per ounce for your specific recipe is important.</p>
+
+          <p style="margin-top: 0.75rem;">MealMutt calculates daily calories, daily ounces, and per-meal portions automatically based on your dog's profile. You put in the weight, age, breed size, and activity level and it does the math.</p>
+
+          <p style="margin-top: 0.75rem; color: #BE5A38; font-size: 0.875rem;">The numbers are a starting point. The real gauge is your dog's body condition. You should be able to feel the ribs without pressing hard, but not see them. Adjust from there.</p>
+        </div>
+      </details>
+
+      <!-- FAQ ITEM 6 -->
+      <details style="border-top: 1px solid #e5e5e5; padding: 1.1rem 0; border-bottom: 1px solid #e5e5e5;">
+        <summary style="
+          font-weight: 600;
+          font-size: 1rem;
+          color: #1a1a1a;
+          cursor: pointer;
+          list-style: none;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 1rem;
+        ">
+          Which proteins are least likely to cause allergies in dogs?
+          <span style="color: #BE5A38; font-size: 1.25rem; flex-shrink: 0;">+</span>
+        </summary>
+        <div style="
+          margin-top: 0.85rem;
+          color: #444;
+          font-size: 0.95rem;
+          line-height: 1.75;
+        ">
+          <p>The proteins most likely to cause reactions are the ones your dog has eaten the longest: chicken and beef. It's not that they're inherently bad. It's that food allergies develop through repeated exposure over time, and those two proteins are in almost everything. Most dogs with food allergies developed them to whatever they ate every day for years.</p>
+
+          <p style="margin-top: 0.75rem;">Novel proteins work better for allergy dogs because the immune system has nothing to react to yet. The most commonly recommended options for elimination diets are venison, rabbit, duck, and whitefish like cod or tilapia. Kangaroo is used too, though it's harder to find. The key is picking something your specific dog has genuinely never eaten before, not just something that sounds exotic.</p>
+
+          <p style="margin-top: 0.75rem;">Turkey is often a good middle-ground option. It's less common in commercial foods than chicken, so many dogs with chicken sensitivities handle it fine. Lamb used to be the go-to novel protein but it's shown up in enough commercial foods over the years that it no longer offers the same reliability it once did.</p>
+
+          <p style="margin-top: 0.75rem;">Worth knowing: a true food allergy is an immune response, which is different from a food intolerance, which is a digestive sensitivity. A dog that vomits every time it eats beef might actually be reacting to the fat content, not the protein itself. Switching to a leaner cut of the same meat sometimes resolves it without changing proteins at all.</p>
+
+          <p style="margin-top: 0.75rem; color: #4D7C0F; font-size: 0.875rem;">MealMutt has recipes across 8 proteins. The allergy filter removes anything containing your dog's known triggers so you're only seeing safe options.</p>
+        </div>
+      </details>
+
+      <p style="
+        margin-top: 1.5rem;
+        font-size: 0.875rem;
+        color: #888;
+        line-height: 1.6;
+      ">
+        Have a question not answered here? The answers above are for informational purposes only.
+        Always consult a licensed veterinarian before changing your dog's diet, especially for puppies,
+        seniors, or dogs with health conditions.
+      </p>
+
     </section>
 
     <!-- WAITLIST / EMAIL CAPTURE (shown after first recipe is generated) -->
