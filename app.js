@@ -201,22 +201,9 @@ function renderSavedProfiles() {
     </div>`).join("");
 }
 
-// ---- EmailJS Config ----
-const EMAILJS_SERVICE_ID  = "service_mealmutt";
-const EMAILJS_TEMPLATE_ID = "template_8yssota";
-const EMAILJS_PUBLIC_KEY  = "4V4ksguJ0axB2Wsml";
-
-// Init EmailJS once SDK is loaded
-(function initEmailJS() {
-  if (typeof emailjs !== "undefined") {
-    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
-  } else {
-    // Retry after scripts load
-    window.addEventListener("load", () => {
-      if (typeof emailjs !== "undefined") emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
-    });
-  }
-})();
+// ---- Kit (ConvertKit) Config ----
+const KIT_API_KEY = "jBxVgbWcImh2IBo1BhrGTg";
+const KIT_FORM_ID = "9455033";
 
 // ---- Waitlist ----
 async function joinWaitlist(e) {
@@ -234,35 +221,21 @@ async function joinWaitlist(e) {
     return;
   }
 
-  // Build template params — auto-populate dog data from state
-  const params = {
-    from_name:       name || "A dog owner",
-    from_email:      email,
-    signup_date:     new Date().toLocaleDateString("en-US", { weekday:"long", year:"numeric", month:"long", day:"numeric" }),
-    referral_source: referral,
-
-    // Dog profile
-    dog_name:        state.name     || "Not entered",
-    dog_weight:      state.weightLbs ? `${state.weightLbs} lbs` : "Not entered",
-    dog_age:         state.age      || "Not entered",
-    dog_size:        state.size     || "Not entered",
-    dog_activity:    state.activity || "Not entered",
-
-    // Nutrition snapshot
-    daily_calories:  state.dailyCalories ? `${state.dailyCalories} kcal` : "Not calculated",
-    daily_oz:        state.dailyOz       ? `${state.dailyOz} oz/day`     : "Not calculated",
-    last_recipe:     state.selectedRecipe ? state.selectedRecipe.name     : "None selected",
-    aafco_status:    state.lastAafcoResult
-                       ? (state.lastAafcoResult.compliant ? "✅ Passed" : "⚠️ Below Minimum")
-                       : "Not checked",
-  };
-
   // Loading state
   btn.disabled   = true;
   btnText.textContent = "Sending…";
 
   try {
-    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
+    const body = { api_key: KIT_API_KEY, email };
+    if (name) body.first_name = name;
+
+    const response = await fetch(`https://api.convertkit.com/v3/forms/${KIT_FORM_ID}/subscribe`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) throw new Error(`Kit API responded ${response.status}`);
 
     // Show success state
     $("waitlist-default").classList.add("hidden");
@@ -275,7 +248,7 @@ async function joinWaitlist(e) {
     localStorage.setItem("mealmutt_waitlist", email);
 
   } catch (err) {
-    console.error("EmailJS error:", err);
+    console.error("Kit subscribe error:", err);
     showToast("❌ Something went wrong. Please try again.", "error");
     btn.disabled    = false;
     btnText.textContent = "Join Free →";
